@@ -10,6 +10,8 @@ drawWord()
 drawHangman()  
 }
 
+var correctGuesses = [];
+var wrongGuesses = [];
 
 // for (var i = 0; i < a.length; i++) {
 //     console.log(a[i])
@@ -25,6 +27,7 @@ function drawWord() {
         $("#word").append("_"); 
     });
 }
+   
 
 // This function draws the hangman images depending on the number of wrong guesses there are.
 function drawHangman() {
@@ -33,25 +36,19 @@ function drawHangman() {
 
 $(document).ready(function() {
 // Step 1 TASK: call the prepare game function and print the secret word to the console. Then run this program.
-prepareGame();
-console.log(secretWord);
-    $("body").keydown(function(eventData){
+    prepareGame();
+    console.log(secretWord);
+    $("body").keypress(function(eventData){
        var guess =  eventData.key.toUpperCase(); 
-        secretWord.forEach(function(letter, index, array){
-        
-        if (guess === letter){
-            // guess is correct, replace underscore with letter
+       
+        if(secretWord.includes(guess)){
+        correctGuesses.push(guess);
         } else {
-            // guess is incorrect, add body part
+        wrongGuesses.push(guess); 
         }
-            
-        });
+        console.log(correctGuesses);
+        console.log(wrongGuesses); 
     }); 
+        
 
 });
-
-// ["W", "O", "R", "D"]
-// var guess = "o";
-// convert guess to uppercase - jquery make letter uppercase
-// is guess in the "secretWord" array
-// forEach
