@@ -38,6 +38,18 @@ var wrongGuesses = [];
 function drawHangman() {
 }
 var wrongImages = ["images/Hangman-1.png", "images/Hangman-2.png", "images/Hangman-3.png", "images/Hangman-4", "images/Hangman-5.png", "images/Hangman-6.png"];
+function checkIfWon() {
+    var didWin = true; 
+    secretWord.forEach(function(letter) {
+        if (!correctGuesses.includes(letter)) {
+            didWin= false; 
+        }
+    }); 
+    if (didWin) {
+        alert ("You win"); 
+    } 
+    
+}
 
 $(document).ready(function() {
     // Step 1 TASK: call the prepare game function and print the secret word to the console. Then run this program.
@@ -49,16 +61,20 @@ $(document).ready(function() {
             correctGuesses.push(letter);
             console.log(correctGuesses);
            drawWord();
+           checkIfWon();
         } else {
             wrongGuesses.push(letter);
             var guessesLength = wrongGuesses.length; 
             console.log(wrongGuesses);
             $("#hangman").attr("src", wrongImages[guessesLength - 1]); 
+            checkIfLost();
         }
         console.log(correctGuesses);
         console.log(wrongGuesses);
     }
     $("body").keypress(onKeyDown);
-    
+   
+     
+     
 });
  
